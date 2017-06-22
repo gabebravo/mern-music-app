@@ -10,8 +10,8 @@ const app = express();
 // =============================================================================
 
 // // routes specific to Movies schema
-//   const artistRouter = require('./server/routes/artist');
-//   app.use('/artists', artistRouter);
+  const artistRouter = require('./server/routes/artist');
+  app.use('/artists', artistRouter);
 
 
 // START THE SERVER
