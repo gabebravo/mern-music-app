@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
+// import containers
+import SearchPage from './containers/ArtistContainer'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h3>MUSIC APP</h3>
-      </div>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path='/' component={SearchPage} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
