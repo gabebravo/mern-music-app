@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row } from 'reactstrap'
+import { Container } from 'reactstrap'
 
 // imported components
 import Header from '../components/Header'
@@ -18,10 +18,8 @@ class ArtistContainer extends Component {
     return(
       <Container>
         <Header />
-        <Row>
-          <SearchBar />
-          <Results />
-        </Row>
+        <SearchBar />
+        <Results />
       </Container>
     );
   }
