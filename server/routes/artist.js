@@ -7,14 +7,18 @@ const Artist = mongoose.model('artists', ArtistSchema);
 
 // get a single artist
 const getOneArtist = (req, res) => {
-  Artist.find({ _id: req.query._id })
+  Artist.find({ _id: req.body.id }, { _id: 0})
     .then( artist => {
-      res.status(200).json({ artist: artist });
+        if (artist){
+          res.status(200).json({ artist: artist });
+        } else {
+          res.status(200).json({ message: 'user does not match' });
+        }
     })
 }
 
 // controllers
-router.get('/', getOneArtist);
+router.post('/byId', getOneArtist);
 
 //export routes
 module.exports = router;

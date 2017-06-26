@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Container, Row } from 'reactstrap'
+import { Container } from 'reactstrap'
 
 // imported components
 import Header from '../components/Header'
 import SearchBar from '../components/SearchBar'
-import Results from '../components/Results'
 
 class ArtistContainer extends Component {
   constructor(){
@@ -18,10 +17,7 @@ class ArtistContainer extends Component {
     return(
       <Container>
         <Header />
-        <Row>
-          <SearchBar />
-          <Results />
-        </Row>
+        <SearchBar />
       </Container>
     );
   }
