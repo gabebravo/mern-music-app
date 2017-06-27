@@ -1,29 +1,44 @@
 import React, { Component } from 'react'
 import { Container } from 'reactstrap'
+import axios from 'axios'
 
-// imported components
+// IMPORTANT COMPONENTS
 import Header from '../components/Header'
-import SearchBar from '../components/SearchBar'
-import Results from '../components/Results'
+import NavLinks from '../components/Artist/NavLinks'
+import ArtistList from '../components/Artist/ArtistList'
 
 class ArtistContainer extends Component {
   constructor(){
     super();
     this.state = {
-      artist: []
+      artist: null
     }
   }
 
-  render(){
-    return(
-      <Container>
-        <Header />
-        <SearchBar />
-        <Results />
-      </Container>
-    );
+  componentDidMount() {
+    axios.get('/search/random')
+    .then( response => {
+      if(response.data.artist){
+        this.setState({ artist: response.data.artist })
+      } else if (response.data.artist) {
+        // print message
+      }
+    })
+    .catch( error => {
+      console.log(error);
+    })
   }
 
+  render(){
+      let artist = this.state.artist ? <ArtistList list={this.state.artist}/> : <div></div>;
+      return(
+        <Container>
+          <Header />
+          <NavLinks />
+          {artist}
+        </Container>
+    );
+  }
 }
 
-export default ArtistContainer;
+export default ArtistContainer

@@ -20,11 +20,11 @@ export default class Header extends React.Component {
       <div>
         <Navbar color="faded" light toggleable>
           <NavbarToggler right onClick={this.toggle} />
-          <NavbarBrand>Searchable Music App</NavbarBrand>
+          <NavbarBrand href="/">Searchable Music App</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/somelink">Random Artist</NavLink>
+                <NavLink href="/artist">Random Artist</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/anotherlink">Create Artist</NavLink>

@@ -3,10 +3,10 @@ import { Row, Col, Button } from 'reactstrap'
 import axios from 'axios'
 
 // import components
-import NameField from './Form/NameField'
-import SortField from './Form/SortField'
-import AgeField from './Form/AgeField'
-import YearsField from './Form/YearsField'
+import NameField from './Search/NameField'
+import SortField from './Search/SortField'
+import AgeField from './Search/AgeField'
+import YearsField from './Search/YearsField'
 import Results from './Results'
 
 // NO RESULTS COMPONENT
@@ -78,7 +78,7 @@ class SearchBar extends Component {
 
   // QUERY FUNCTIONS
   sendQuery = () => {
-    axios.get('/artists/random')
+    axios.get('/search/random')
     .then( response => {
       if(response.data.artist){
         this.setState({ artistArray: response.data.artist })
