@@ -1,17 +1,21 @@
 // BASE SETUP : import dependencies, import mongoose, instantiate middleware
 // =============================================================================
 const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+// parse application/json
+app.use(bodyParser.json())
+
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
-const app = express();
 
 // ROUTES FOR OUR API
 // =============================================================================
 
 // // routes specific to Movies schema
   const artistRouter = require('./server/routes/artist');
-  app.use('/search', artistRouter);
+  app.use('/artist', artistRouter);
 
 
 // START THE SERVER

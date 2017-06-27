@@ -16,7 +16,7 @@ class ArtistContainer extends Component {
   }
 
   componentDidMount() {
-    axios.get('/search/random')
+    axios.get('/artist/random')
     .then( response => {
       if(response.data.artist){
         this.setState({ artist: response.data.artist })

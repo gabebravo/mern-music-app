@@ -27,7 +27,7 @@ export default class Header extends React.Component {
                 <NavLink href="/artist">Random Artist</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/anotherlink">Create Artist</NavLink>
+                <NavLink href="/newArtist">Create Artist</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

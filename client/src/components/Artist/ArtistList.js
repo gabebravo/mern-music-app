@@ -33,19 +33,19 @@ const ArtistList = props => {
               <ListGroupItemText>{artist.name}</ListGroupItemText>
             </Col>
             <Col xs="9" sm="9" md="9">
-              <img src={artist.image} alt={artist.name}/>
+              { artist.image && <img src={artist.image} alt={artist.name}/> }
             </Col>
           </ListGroupItem>
           <ListGroupItem style={styles}>
-            <ListGroupItemHeading>{artist.yearsActive}</ListGroupItemHeading>
+            <ListGroupItemHeading>{artist.yearsActive || '0'}</ListGroupItemHeading>
             <ListGroupItemText>Years Active</ListGroupItemText>
           </ListGroupItem>
           <ListGroupItem style={styles}>
-            <ListGroupItemHeading>{`$${artist.netWorth.toLocaleString()}`}</ListGroupItemHeading>
+            <ListGroupItemHeading>{ artist.netWorth && `$${artist.netWorth.toLocaleString()}`}</ListGroupItemHeading>
             <ListGroupItemText>Net Worth</ListGroupItemText>
           </ListGroupItem>
           <ListGroupItem style={styles}>
-            <ListGroupItemHeading>{artist.labelName}</ListGroupItemHeading>
+            <ListGroupItemHeading>{artist.labelName || ''}</ListGroupItemHeading>
             <ListGroupItemText>Label</ListGroupItemText>
           </ListGroupItem>
           {

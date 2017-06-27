@@ -21,8 +21,29 @@ const randomArtist = (req, res) => {
     })
 }
 
+const createArtist = (req, res) => {
+  const { artist } = req.body;
+
+  const newArtist = new Artist({
+    name: artist.name,
+    age: artist.age,
+    yearsActive: Number( artist.yearsActive ),
+    genre: artist.genre,
+  });
+
+  newArtist.save()
+    .then( () => {
+      res.status(200).json({ message: 'The artist that you added was successfully saved' });
+    })
+    .catch( error => {
+      console.log(error);
+      res.status(400).json({ message: 'Your request could not be processed' });
+    })
+}
+
 // controllers
 router.get('/random', randomArtist);
+router.post('/create', createArtist);
 
 //export routes
 module.exports = router;

@@ -78,7 +78,7 @@ class SearchBar extends Component {
 
   // QUERY FUNCTIONS
   sendQuery = () => {
-    axios.get('/search/random')
+    axios.get('/artist/random')
     .then( response => {
       if(response.data.artist){
         this.setState({ artistArray: response.data.artist })
