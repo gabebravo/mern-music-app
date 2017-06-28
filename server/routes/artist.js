@@ -10,7 +10,7 @@ const randomArtist = (req, res) => {
   Artist.count()
     .then( count => {
       let random = Math.floor(Math.random() * count);
-      Artist.find({}, { _id: 0}).skip(random).limit(1)
+      Artist.find({}).skip(random).limit(1)
         .then( artist => {
             if (artist){
               res.status(200).json({ artist: artist });
@@ -41,9 +41,21 @@ const createArtist = (req, res) => {
     })
 }
 
+const deleteArtist = (req, res) => {
+  Artist.remove({ _id: req.body.id })
+    .then( () => {
+      res.status(200).json({ message: 'You have successfully deleted the artist' });
+    })
+    .catch( error => {
+      console.log(error);
+      res.status(400).json({ message: 'Your request could not be processed' });
+    })
+}
+
 // controllers
 router.get('/random', randomArtist);
 router.post('/create', createArtist);
+router.delete('/delete', deleteArtist);
 
 //export routes
 module.exports = router;

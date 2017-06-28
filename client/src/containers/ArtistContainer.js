@@ -6,12 +6,15 @@ import axios from 'axios'
 import Header from '../components/Header'
 import NavLinks from '../components/Artist/NavLinks'
 import ArtistList from '../components/Artist/ArtistList'
+import PopModal from '../components/PopModal'
 
 class ArtistContainer extends Component {
   constructor(){
     super();
     this.state = {
-      artist: null
+      artist: null,
+      modal: false,
+      message: ''
     }
   }
 
@@ -29,13 +32,45 @@ class ArtistContainer extends Component {
     })
   }
 
+  deleteArtist = () => {
+    const artistId = this.state.artist["0"]._id;
+    axios.delete('/artist/delete', {
+      data: { id: artistId }
+    })
+      .then( response => {
+        this.toggleModal(response.data.message);
+        console.log(response.data.message);
+      })
+      .catch( error => {
+        console.log(error);
+      })
+  }
+
+  toggleModal = (text = '') => {
+    console.log(this.state.modal);
+    this.setState({
+      modal: !this.state.modal,
+      message: text
+    });
+  }
+
+  refreshPage = () => {
+    this.setState({
+      modal: !this.state.modal,
+      message: ''
+    });
+    window.location.reload();
+  }
+
   render(){
       let artist = this.state.artist ? <ArtistList list={this.state.artist}/> : <div></div>;
       return(
         <Container>
           <Header />
-          <NavLinks />
+          <NavLinks handleDelete={this.deleteArtist}/>
           {artist}
+          <PopModal boolVal={this.state.modal} modalHandler={this.refreshPage}
+            title='Sucess' message={this.state.message}/>
         </Container>
     );
   }
