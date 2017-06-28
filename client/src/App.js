@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SearchPage from './containers/SearchContainer'
 import ArtistPage from './containers/ArtistContainer'
 import CreatePage from './containers/CreateArtist'
+import UpdatePage from './containers/UpdateArtist'
 
 class App extends Component {
   render() {
@@ -13,8 +14,9 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path='/' component={SearchPage} />
-            <Route exact path='/artist' component={ArtistPage} />
-            <Route exact path='/newArtist' component={CreatePage} />
+            <Route path='/artist' component={ArtistPage} />
+            <Route path='/newArtist' component={CreatePage} />
+            <Route path='/editArtist' component={UpdatePage} />
           </Switch>
         </div>
       </Router>

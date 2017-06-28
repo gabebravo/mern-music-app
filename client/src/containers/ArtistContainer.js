@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container } from 'reactstrap'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 // IMPORTANT COMPONENTS
@@ -14,7 +15,8 @@ class ArtistContainer extends Component {
     this.state = {
       artist: null,
       modal: false,
-      message: ''
+      message: '',
+      editPage: false
     }
   }
 
@@ -32,6 +34,12 @@ class ArtistContainer extends Component {
     })
   }
 
+  componentWillUnmount(){
+    this.setState({
+      editPage: false
+    });
+  }
+
   deleteArtist = () => {
     const artistId = this.state.artist["0"]._id;
     axios.delete('/artist/delete', {
@@ -44,6 +52,12 @@ class ArtistContainer extends Component {
       .catch( error => {
         console.log(error);
       })
+  }
+
+  updateArtist = () => {
+    this.setState({
+      editPage: true
+    });
   }
 
   toggleModal = (text = '') => {
@@ -62,12 +76,17 @@ class ArtistContainer extends Component {
     window.location.reload();
   }
 
+// NOTE: <Redirect> uses 'push' keyword to add the page transition to the history
+// 2nd state param is the object that will be passed as state in the redirect
   render(){
       let artist = this.state.artist ? <ArtistList list={this.state.artist}/> : <div></div>;
+      let jumpToEditPage = this.state.editPage ?
+       <Redirect push to={{ pathname: `/editArtist`, state: { artist: this.state.artist } }}/> : <div></div>;
       return(
         <Container>
+          {jumpToEditPage}
           <Header />
-          <NavLinks handleDelete={this.deleteArtist}/>
+          <NavLinks handleDelete={this.deleteArtist} handleUpdate={this.updateArtist}/>
           {artist}
           <PopModal boolVal={this.state.modal} modalHandler={this.refreshPage}
             title='Sucess' message={this.state.message}/>

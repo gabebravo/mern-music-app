@@ -6,7 +6,7 @@ const NavLinks = props => (
     <Col xs="12" sm="12" md="12">
       <Nav>
         <NavItem>
-          <NavLink href="/edit">Edit</NavLink>
+          <NavLink href="#" onClick={props.handleUpdate}>Edit</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#" onClick={props.handleDelete}>Delete</NavLink>
