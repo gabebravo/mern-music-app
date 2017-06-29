@@ -13,9 +13,13 @@ mongoose.Promise = global.Promise;
 // ROUTES FOR OUR API
 // =============================================================================
 
-// // routes specific to Movies schema
-  const artistRouter = require('./server/routes/artist');
+// routes specific to artist CRUD
+const artistRouter = require('./server/routes/artist');
   app.use('/artist', artistRouter);
+
+// routes specific to artist search queries
+const searchRouter = require('./server/routes/search');
+    app.use('/search', searchRouter);
 
 
 // START THE SERVER

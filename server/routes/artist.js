@@ -15,7 +15,7 @@ const randomArtist = (req, res) => {
             if (artist){
               res.status(200).json({ artist: artist });
             } else {
-              res.status(200).json({ message: 'user does not match' });
+              res.status(400).json({ message: 'user does not match' });
             }
         })
     })
