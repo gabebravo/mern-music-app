@@ -100,12 +100,14 @@ class SearchBar extends Component {
     }
 
     // axios.get('/search/queryArtists', {
-    axios.get('/search/sortQuery', {
+    axios.get('/search/queryArtists', {
       params: { criteria: params }
     })
     .then( response => {
       if(response.data.artists){
-        this.setState({ artistArray: response.data.artists })
+        this.setState({
+          artistArray: response.data.artists
+        })
       } else if (response.data.message) {
         console.log(response.data.message);
       }

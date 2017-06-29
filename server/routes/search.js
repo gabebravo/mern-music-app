@@ -30,16 +30,48 @@ const getYearsRange = (req, res) => {
     })
 }
 
+const buildQuery = (qObj) => {
+  const query = {};
+  if(qObj.name){
+    query.name = qObj.name.toString()
+  }
+  if(qObj.ageLow & qObj.ageHigh){
+    query.age = {
+      $gte: qObj.ageLow,
+      $lte: qObj.ageHigh
+    }
+  }
+  if(qObj.yearsLow & qObj.yearsHigh){
+    query.yearsActive = {
+      $gte: qObj.yearsLow,
+      $lte: qObj.yearsHigh
+    }
+  }
+  return query;
+  // console.log(query);
+}
+
 const getArtistQuery = (req, res) => {
   const search = JSON.parse(req.query.criteria);
-  Artist.find({ name: search.name })
-  .then( artists => {
-    res.status(200).json({ artists: artists });
-  })
-  .catch( error => {
-    console.log(error);
-    res.status(400).json({ message: 'Could not find any results for your query'});
-  })
+  if( search.sortVal ) {
+    Artist.find(buildQuery(search)).sort({[`${search.sortVal}`]: 1 })
+    .then( artists => {
+      res.status(200).json({ artists: artists });
+    })
+    .catch( error => {
+      console.log(error);
+      res.status(400).json({ message: 'Could not find any results for your query'});
+    })
+  } else {
+    Artist.find(buildQuery(search))
+    .then( artists => {
+      res.status(200).json({ artists: artists });
+    })
+    .catch( error => {
+      console.log(error);
+      res.status(400).json({ message: 'Could not find any results for your query'});
+    })
+  }
 }
 
 const queryBySort = (req, res) => {

@@ -10,7 +10,7 @@ const SortField = props => (
       <option selected>Choose Sort Type</option>
       <option value='name'>Name</option>
       <option value='age'>Age</option>
-      <option value='yearsActive'>Years</option>
+      <option value='yearsActive'>Years Active</option>
     </Input>
   </div>
 );
