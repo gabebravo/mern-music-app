@@ -30,9 +30,37 @@ const getYearsRange = (req, res) => {
     })
 }
 
+const getArtistQuery = (req, res) => {
+  const search = JSON.parse(req.query.criteria);
+  Artist.find({ name: search.name })
+  .then( artists => {
+    res.status(200).json({ artists: artists });
+  })
+  .catch( error => {
+    console.log(error);
+    res.status(400).json({ message: 'Could not find any results for your query'});
+  })
+}
+
+const queryBySort = (req, res) => {
+  const search = JSON.parse(req.query.criteria);
+  Artist.find({}).sort({[`${search.sortVal}`]: 1 }).skip(0).limit(20)
+  .then( artists => {
+    res.status(200).json({ artists: artists });
+  })
+  .catch( error => {
+    console.log(error);
+    res.status(400).json({ message: 'Could not find any results for your query'});
+  })
+}
+
 // controllers
 router.get('/ageRange', getAgeRange);
-router.get('/yearsRange', getYearsRange)
+router.get('/yearsRange', getYearsRange);
+router.get('/queryArtists', getArtistQuery);
+
+// test route
+router.get('/sortQuery', queryBySort);
 
 //export routes
 module.exports = router;

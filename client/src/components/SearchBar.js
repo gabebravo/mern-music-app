@@ -63,6 +63,7 @@ class SearchBar extends Component {
       return (
         <Results
           key={index}
+          id={artist._id}
           name={artist.name}
           age={artist.age}
           yearsActive={artist.yearsActive}
@@ -78,12 +79,35 @@ class SearchBar extends Component {
 
   // QUERY FUNCTIONS
   sendQuery = () => {
-    axios.get('/artist/random')
+    let params = {};
+    if ( this.state.nameVal ) {
+      params.name = this.state.nameVal;
+    }
+    if ( this.state.ageLow ) {
+      params.ageLow = this.state.ageLow;
+    }
+    if ( this.state.ageHigh ) {
+      params.ageHigh = this.state.ageHigh;
+    }
+    if ( this.state.yearsLow ) {
+      params.yearsLow = this.state.yearsLow;
+    }
+    if ( this.state.yearsHigh ) {
+      params.yearsHigh = this.state.yearsHigh;
+    }
+    if ( this.state.sortVal ) {
+      params.sortVal = this.state.sortVal;
+    }
+
+    // axios.get('/search/queryArtists', {
+    axios.get('/search/sortQuery', {
+      params: { criteria: params }
+    })
     .then( response => {
-      if(response.data.artist){
-        this.setState({ artistArray: response.data.artist })
-      } else if (response.data.artist) {
-        // print message
+      if(response.data.artists){
+        this.setState({ artistArray: response.data.artists })
+      } else if (response.data.message) {
+        console.log(response.data.message);
       }
     })
     .catch( error => {
@@ -110,6 +134,10 @@ class SearchBar extends Component {
         </Col>
         <Col xs="12" sm="7" md="7">
           {artists}
+          <div style={{ textAlign: "center"}}>
+            { this.state.artistArray.length > 0 &&
+              <p>{`${this.state.artistArray.length}`} Records Found</p> }
+          </div>
         </Col>
       </Row>
     );

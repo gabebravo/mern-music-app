@@ -70,11 +70,23 @@ const updateArtist = (req, res) => {
     })
 }
 
+const findArtist = (req, res) => {
+  Artist.find({ _id: req.query.id })
+    .then( artist => {
+      res.status(200).json({ artist: artist });
+    })
+    .catch( error => {
+      console.log(error);
+      res.status(400).json({ message: 'Sorry we could not find the artist' });
+    })
+}
+
 // controllers
 router.get('/random', randomArtist);
 router.post('/create', createArtist);
 router.delete('/delete', deleteArtist);
 router.post('/update', updateArtist);
+router.get('/findOne', findArtist);
 
 //export routes
 module.exports = router;
