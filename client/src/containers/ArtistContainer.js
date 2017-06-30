@@ -10,8 +10,8 @@ import ArtistList from '../components/Artist/ArtistList'
 import PopModal from '../components/PopModal'
 
 class ArtistContainer extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       artist: null,
       modal: false,
@@ -21,17 +21,36 @@ class ArtistContainer extends Component {
   }
 
   componentDidMount() {
-    axios.get('/artist/random')
-    .then( response => {
-      if(response.data.artist){
-        this.setState({ artist: response.data.artist })
-      } else if (response.data.artist) {
-        // print message
-      }
-    })
-    .catch( error => {
-      console.log(error);
-    })
+
+    if(this.props.artistId){
+      axios.get('/artist/findOne', {
+        params: { id: this.props.artistId }
+      })
+      .then( response => {
+        if(response.data.artist){
+          console.log(response.data.artist);
+          this.setState({ artist: response.data.artist })
+        } else if (response.data.message) {
+          console.log(response.data.message);
+        }
+      })
+      .catch( error => {
+        console.log(error);
+      })
+    } else {
+      axios.get('/artist/random')
+      .then( response => {
+        if(response.data.artist){
+          console.log(response.data.artist);
+          this.setState({ artist: response.data.artist })
+        } else if (response.data.message) {
+          console.log(response.data.message);
+        }
+      })
+      .catch( error => {
+        console.log(error);
+      })
+    }
   }
 
   componentWillUnmount(){

@@ -1,11 +1,13 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const Result = props => (
   <ListGroup style={{ padding: '1rem', textAlign: 'center' }}>
     { props.image && <ListGroupItem>{<img src={`${props.image}`} alt='artist' className="rounded-circle"/>}</ListGroupItem> }
-    { props.name && <ListGroupItem active>{props.name}
-      <i style={{marginLeft: '1rem'}} className="fa fa-info-circle fa-2x"></i></ListGroupItem> }
+    { props.name && <ListGroupItem active>{props.name}<Link to={`/artistInfo/${props.id}`}>
+        <i style={{marginLeft: '1rem', color: '#fff' }} className="fa fa-info-circle fa-2x"></i>
+      </Link></ListGroupItem> }
     { props.age && <ListGroupItem>{`Age: ${props.age}`}</ListGroupItem> }
     { props.yearsActive >= 0 && <ListGroupItem>{`Years Active: ${props.yearsActive}`}</ListGroupItem> }
     { props.genre && <ListGroupItem>{`Genre: ${props.genre}`}</ListGroupItem> }
@@ -15,4 +17,4 @@ const Result = props => (
   </ListGroup>
 );
 
-export default Result
+export default Result;
