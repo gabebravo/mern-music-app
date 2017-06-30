@@ -7,6 +7,7 @@ import NameField from './Search/NameField'
 import SortField from './Search/SortField'
 import AgeField from './Search/AgeField'
 import YearsField from './Search/YearsField'
+import Pagination from './Search/ResultsPagination'
 import Results from './Results'
 
 // NO RESULTS COMPONENT
@@ -99,9 +100,26 @@ class SearchBar extends Component {
       params.sortVal = this.state.sortVal;
     }
 
-    // axios.get('/search/queryArtists', {
     axios.get('/search/queryArtists', {
       params: { criteria: params }
+    })
+    .then( response => {
+      if(response.data.artists){
+        this.setState({
+          artistArray: response.data.artists
+        })
+      } else if (response.data.message) {
+        console.log(response.data.message);
+      }
+    })
+    .catch( error => {
+      console.log(error);
+    })
+  }
+
+  renderPagination = (page) => {
+    axios.get('/search/paganation', {
+      params: { criteria: this.state.queryParams, skipVal: (page * 10) }
     })
     .then( response => {
       if(response.data.artists){
@@ -137,6 +155,9 @@ class SearchBar extends Component {
         <Col xs="12" sm="7" md="7">
           {artists}
           <div style={{ textAlign: "center"}}>
+            { this.state.artistArray.length > 0 &&
+              <Pagination totalItems={this.state.artistArray.length}
+                paginationHandler={this.renderPagination} /> }
             { this.state.artistArray.length > 0 &&
               <p>{`${this.state.artistArray.length}`} Records Found</p> }
           </div>

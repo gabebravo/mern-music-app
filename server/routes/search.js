@@ -48,7 +48,6 @@ const buildQuery = (qObj) => {
     }
   }
   return query;
-  // console.log(query);
 }
 
 const getArtistQuery = (req, res) => {
@@ -65,6 +64,7 @@ const getArtistQuery = (req, res) => {
   } else {
     Artist.find(buildQuery(search))
     .then( artists => {
+      console.log(artists.length);
       res.status(200).json({ artists: artists });
     })
     .catch( error => {
@@ -74,9 +74,9 @@ const getArtistQuery = (req, res) => {
   }
 }
 
-const queryBySort = (req, res) => {
+const paganationQuery = (req, res) => {
   const search = JSON.parse(req.query.criteria);
-  Artist.find({}).sort({[`${search.sortVal}`]: 1 }).skip(0).limit(20)
+  Artist.find(buildQuery(search)).skip(req.query.skipVal).limit(10)
   .then( artists => {
     res.status(200).json({ artists: artists });
   })
@@ -90,9 +90,7 @@ const queryBySort = (req, res) => {
 router.get('/ageRange', getAgeRange);
 router.get('/yearsRange', getYearsRange);
 router.get('/queryArtists', getArtistQuery);
-
-// test route
-router.get('/sortQuery', queryBySort);
+router.get('/paganation', paganationQuery);
 
 //export routes
 module.exports = router;
