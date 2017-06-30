@@ -51,21 +51,27 @@ const buildQuery = (qObj) => {
 }
 
 const getArtistQuery = (req, res) => {
+  let count = 0;
   const search = JSON.parse(req.query.criteria);
+  const skipVal = Number(req.query.skipVal);
+
   if( search.sortVal ) {
-    Artist.find(buildQuery(search)).sort({[`${search.sortVal}`]: 1 })
+    Artist.find(buildQuery(search)).sort({[`${search.sortVal}`]: 1 }).count()
+    .then( qCount => count = qCount)
+    Artist.find(buildQuery(search)).sort({[`${search.sortVal}`]: 1 }).skip(skipVal).limit(10)
     .then( artists => {
-      res.status(200).json({ artists: artists });
+      res.status(200).json({ artists: artists, count: count });
     })
     .catch( error => {
       console.log(error);
       res.status(400).json({ message: 'Could not find any results for your query'});
     })
   } else {
-    Artist.find(buildQuery(search))
+    Artist.find(buildQuery(search)).sort({[`${search.sortVal}`]: 1 }).count()
+    .then( qCount => count = qCount)
+    Artist.find(buildQuery(search)).skip(skipVal).limit(10)
     .then( artists => {
-      console.log(artists.length);
-      res.status(200).json({ artists: artists });
+      res.status(200).json({ artists: artists, count: count });
     })
     .catch( error => {
       console.log(error);
@@ -74,23 +80,10 @@ const getArtistQuery = (req, res) => {
   }
 }
 
-const paganationQuery = (req, res) => {
-  const search = JSON.parse(req.query.criteria);
-  Artist.find(buildQuery(search)).skip(req.query.skipVal).limit(10)
-  .then( artists => {
-    res.status(200).json({ artists: artists });
-  })
-  .catch( error => {
-    console.log(error);
-    res.status(400).json({ message: 'Could not find any results for your query'});
-  })
-}
-
 // controllers
 router.get('/ageRange', getAgeRange);
 router.get('/yearsRange', getYearsRange);
 router.get('/queryArtists', getArtistQuery);
-router.get('/paganation', paganationQuery);
 
 //export routes
 module.exports = router;

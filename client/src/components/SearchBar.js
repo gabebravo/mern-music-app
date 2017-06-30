@@ -29,6 +29,7 @@ class SearchBar extends Component {
       ageHigh: '',
       yearsLow: '',
       yearsHigh: '',
+      count: 0,
       artistArray: []
     };
   }
@@ -79,7 +80,7 @@ class SearchBar extends Component {
   }
 
   // QUERY FUNCTIONS
-  sendQuery = () => {
+  sendQuery = (page = 0) => {
     let params = {};
     if ( this.state.nameVal ) {
       params.name = this.state.nameVal;
@@ -101,30 +102,13 @@ class SearchBar extends Component {
     }
 
     axios.get('/search/queryArtists', {
-      params: { criteria: params }
+      params: { criteria: params, skipVal: (page * 10) }
     })
     .then( response => {
       if(response.data.artists){
         this.setState({
-          artistArray: response.data.artists
-        })
-      } else if (response.data.message) {
-        console.log(response.data.message);
-      }
-    })
-    .catch( error => {
-      console.log(error);
-    })
-  }
-
-  renderPagination = (page) => {
-    axios.get('/search/paganation', {
-      params: { criteria: this.state.queryParams, skipVal: (page * 10) }
-    })
-    .then( response => {
-      if(response.data.artists){
-        this.setState({
-          artistArray: response.data.artists
+          artistArray: response.data.artists,
+          count: response.data.count
         })
       } else if (response.data.message) {
         console.log(response.data.message);
@@ -156,10 +140,10 @@ class SearchBar extends Component {
           {artists}
           <div style={{ textAlign: "center"}}>
             { this.state.artistArray.length > 0 &&
-              <Pagination totalItems={this.state.artistArray.length}
-                paginationHandler={this.renderPagination} /> }
+              <Pagination totalItems={this.state.count}
+                paginationHandler={this.sendQuery} /> }
             { this.state.artistArray.length > 0 &&
-              <p>{`${this.state.artistArray.length}`} Records Found</p> }
+              <p>{`${this.state.count}`} Records Found</p> }
           </div>
         </Col>
       </Row>

@@ -5,7 +5,7 @@ class ResultsPagination extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={
+    this.state = {
       totalItems: Math.ceil(this.props.totalItems/10)
     }
   }
@@ -14,7 +14,7 @@ class ResultsPagination extends React.Component {
     const piArray = [];
     for( let i = 0; i < length; i++){
       piArray.push(
-        <PaginationItem key={i} onClick={() => this.props.paginationHandler(i + 1)}>
+        <PaginationItem key={i} onClick={() => this.props.paginationHandler(i)}>
           <PaginationLink href="#">
             { i + 1 }
           </PaginationLink>
