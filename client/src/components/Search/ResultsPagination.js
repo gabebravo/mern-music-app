@@ -5,9 +5,6 @@ class ResultsPagination extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      totalItems: Math.ceil(this.props.totalItems/10)
-    }
   }
 
   printPagination = (length) => {
@@ -24,7 +21,7 @@ class ResultsPagination extends React.Component {
   }
 
   render() {
-    let PaginationItems = this.printPagination(this.state.totalItems);
+    let PaginationItems = this.printPagination(Math.ceil(this.props.totalItems/10));
     return (
       <Pagination style={{ justifyContent: 'center'}}>
         <PaginationItem>

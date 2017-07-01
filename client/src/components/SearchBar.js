@@ -139,7 +139,7 @@ class SearchBar extends Component {
         <Col xs="12" sm="7" md="7">
           {artists}
           <div style={{ textAlign: "center"}}>
-            { this.state.artistArray.length > 0 &&
+            { this.state.count > 0 &&
               <Pagination totalItems={this.state.count}
                 paginationHandler={this.sendQuery} /> }
             { this.state.artistArray.length > 0 &&

@@ -67,7 +67,7 @@ const getArtistQuery = (req, res) => {
       res.status(400).json({ message: 'Could not find any results for your query'});
     })
   } else {
-    Artist.find(buildQuery(search)).sort({[`${search.sortVal}`]: 1 }).count()
+    Artist.find(buildQuery(search)).count()
     .then( qCount => count = qCount)
     Artist.find(buildQuery(search)).skip(skipVal).limit(10)
     .then( artists => {
