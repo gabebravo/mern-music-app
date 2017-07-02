@@ -2,4 +2,35 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #E1E2E1
+}
+
+.navbar-light .navbar-brand, .navbar-light .navbar-toggler {
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.bg-faded {
+  background-color: #26a69a;
+}
+
+button.btn {
+  background-color: #FFC107;
+}
+
+button.btn:hover {
+  background-color: #FFA000;
+}
+
+.list-group-item.active {
+  background-color: #00766c;
+  border-color: #00766c;
+}
+
+.list-group-item:first-child {
+  background-color: #64d8cb;
+  border-color: #64d8cb;
 }

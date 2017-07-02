@@ -6,7 +6,7 @@ const Result = props => (
   <ListGroup style={{ padding: '1rem', textAlign: 'center' }}>
     { props.image && <ListGroupItem>{<img src={`${props.image}`} alt='artist' className="rounded-circle"/>}</ListGroupItem> }
     { props.name && <ListGroupItem active>{props.name}<Link to={`/artistInfo/${props.id}`}>
-        <i style={{marginLeft: '1rem', color: '#fff' }} className="fa fa-info-circle fa-2x"></i>
+        <i style={{marginLeft: '1rem', color: '#FFC107' }} className="fa fa-info-circle fa-2x"></i>
       </Link></ListGroupItem> }
     { props.age && <ListGroupItem>{`Age: ${props.age}`}</ListGroupItem> }
     { props.yearsActive >= 0 && <ListGroupItem>{`Years Active: ${props.yearsActive}`}</ListGroupItem> }
