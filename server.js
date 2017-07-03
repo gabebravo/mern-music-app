@@ -10,6 +10,10 @@ app.use(bodyParser.json())
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 // ROUTES FOR OUR API
 // =============================================================================
 
