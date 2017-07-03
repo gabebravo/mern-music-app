@@ -1,5 +1,6 @@
 import React from 'react'
 import { Label, Input } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 const NameField = props => (
   <div style={{ marginBottom: '1rem' }}>
@@ -10,5 +11,10 @@ const NameField = props => (
       placeholder="enter musican name" />
   </div>
 );
+
+NameField.propTypes = {
+  name: PropTypes.string,
+  nameHandler: PropTypes.func
+}
 
 export default NameField

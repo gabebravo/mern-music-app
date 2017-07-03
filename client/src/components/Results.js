@@ -1,6 +1,7 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Result = props => (
   <ListGroup style={{ padding: '1rem', textAlign: 'center' }}>
@@ -16,5 +17,16 @@ const Result = props => (
     { props.retired && <ListGroupItem>{`Retired: ${props.retired}`}</ListGroupItem> }
   </ListGroup>
 );
+
+Result.propTypes = {
+  image: PropTypes.string,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  yearsActive: PropTypes.number,
+  genre: PropTypes.string,
+  website: PropTypes.string,
+  labelName: PropTypes.string,
+  retired: PropTypes.bool
+}
 
 export default Result;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col, ListGroup, ListGroupItem } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 const Album = props => (
   <Col xs="6" sm="6" md="6" style={{ marginBottom: '1rem'}}>
@@ -11,5 +12,12 @@ const Album = props => (
     </ListGroup>
   </Col>
 );
+
+Album.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  copiesSold: PropTypes.number,
+  tracks: PropTypes.number
+}
 
 export default Album

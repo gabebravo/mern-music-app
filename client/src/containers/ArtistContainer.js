@@ -8,6 +8,7 @@ import Header from '../components/Header'
 import NavLinks from '../components/Artist/NavLinks'
 import ArtistList from '../components/Artist/ArtistList'
 import PopModal from '../components/PopModal'
+ import PropTypes from 'prop-types'
 
 class ArtistContainer extends Component {
   constructor(props){
@@ -21,14 +22,12 @@ class ArtistContainer extends Component {
   }
 
   componentDidMount() {
-
     if(this.props.artistId){
       axios.get('/artist/findOne', {
         params: { id: this.props.artistId }
       })
       .then( response => {
         if(response.data.artist){
-          console.log(response.data.artist);
           this.setState({ artist: response.data.artist })
         } else if (response.data.message) {
           console.log(response.data.message);
@@ -41,7 +40,6 @@ class ArtistContainer extends Component {
       axios.get('/artist/random')
       .then( response => {
         if(response.data.artist){
-          console.log(response.data.artist);
           this.setState({ artist: response.data.artist })
         } else if (response.data.message) {
           console.log(response.data.message);
@@ -65,8 +63,8 @@ class ArtistContainer extends Component {
       data: { id: artistId }
     })
       .then( response => {
-        this.toggleModal(response.data.message);
         console.log(response.data.message);
+        this.toggleModal(response.data.message);
       })
       .catch( error => {
         console.log(error);
@@ -81,6 +79,7 @@ class ArtistContainer extends Component {
 
   toggleModal = (text = '') => {
     console.log(this.state.modal);
+    console.log(text);
     this.setState({
       modal: !this.state.modal,
       message: text
@@ -112,6 +111,10 @@ class ArtistContainer extends Component {
         </Container>
     );
   }
+}
+
+ArtistContainer.propTypes = {
+  artistId: PropTypes.string
 }
 
 export default ArtistContainer

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Row, Button } from 'reactstrap'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 import Header from '../components/Header'
 import TextInput from '../components/Create/TextInput'
@@ -33,7 +34,6 @@ class updateArtist extends Component {
     })
     .then( response => {
       this.toggleModal(response.data.message);
-      console.log(response.data.message);
     })
     .catch( error => {
       console.log(error);
@@ -88,6 +88,10 @@ class updateArtist extends Component {
       </Container>
     );
   }
+}
+
+updateArtist.propTypes = {
+  artist: PropTypes.array
 }
 
 export default updateArtist

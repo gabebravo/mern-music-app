@@ -34,6 +34,19 @@ class SearchBar extends Component {
     };
   }
 
+  componentWillUnmount(){
+    this.setState({
+      nameVal: '',
+      sortVal: '',
+      ageLow: '',
+      ageHigh: '',
+      yearsLow: '',
+      yearsHigh: '',
+      count: 0,
+      artistArray: []
+    });
+  }
+
   setName = (e) => {
     let name = e.target.value;
     this.setState({ nameVal: name })
@@ -139,7 +152,7 @@ class SearchBar extends Component {
         <Col xs="12" sm="7" md="7">
           {artists}
           <div style={{ textAlign: "center"}}>
-            { this.state.count > 0 &&
+            { this.state.artistArray.length > 0 &&
               <Pagination totalItems={this.state.count}
                 paginationHandler={this.sendQuery} /> }
             { this.state.artistArray.length > 0 &&

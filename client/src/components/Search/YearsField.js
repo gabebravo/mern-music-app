@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 class YearsField extends Component {
   constructor(props){
@@ -42,6 +43,11 @@ class YearsField extends Component {
       </div>
     );
   }
+}
+
+YearsField.propTypes = {
+  lowerYearsHandler: PropTypes.func,
+  higherYearsHandler: PropTypes.func
 }
 
 export default YearsField

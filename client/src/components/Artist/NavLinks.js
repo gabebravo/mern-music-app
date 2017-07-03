@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row, Col, Nav, NavItem, NavLink } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 const NavLinks = props => (
   <Row style={{ marginTop: '1rem' }}>
@@ -15,5 +16,10 @@ const NavLinks = props => (
     </Col>
   </Row>
 );
+
+NavLinks.propTypes = {
+  handleUpdate: PropTypes.func,
+  handleDelete: PropTypes.func
+}
 
 export default NavLinks

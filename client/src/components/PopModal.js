@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 const PopModal = props => (
   <div>
@@ -13,5 +14,10 @@ const PopModal = props => (
     </Modal>
   </div>
 );
+
+PopModal.propTypes ={
+  boolVal: PropTypes.bool,
+  modalHandler: PropTypes.func
+}
 
 export default PopModal;

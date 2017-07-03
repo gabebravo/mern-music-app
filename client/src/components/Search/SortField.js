@@ -1,5 +1,6 @@
 import React from 'react'
 import { Label, Input } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 const SortField = props => (
   <div style={{ marginBottom: '1rem' }}>
@@ -14,5 +15,10 @@ const SortField = props => (
     </Input>
   </div>
 );
+
+SortField.propTypes = {
+  sortVal: PropTypes.string,
+  sortHandler: PropTypes.func
+}
 
 export default SortField

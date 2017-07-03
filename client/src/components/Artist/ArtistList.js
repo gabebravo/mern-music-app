@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap'
 import Album from './Album'
+import PropTypes from 'prop-types'
 
 const styles = {
   display: 'block'
@@ -59,6 +60,10 @@ const ArtistList = props => {
       </Col>
     </Row>
   );
+}
+
+ArtistList.propTypes = {
+  list: PropTypes.array
 }
 
 export default ArtistList

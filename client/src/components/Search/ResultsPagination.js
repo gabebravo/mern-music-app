@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-class ResultsPagination extends React.Component {
-
-  constructor(props){
-    super(props);
-  }
+class ResultsPagination extends Component {
 
   printPagination = (length) => {
     const piArray = [];
@@ -21,6 +17,7 @@ class ResultsPagination extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     let PaginationItems = this.printPagination(Math.ceil(this.props.totalItems/10));
     return (
       <Pagination style={{ justifyContent: 'center'}}>
