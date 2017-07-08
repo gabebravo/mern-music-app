@@ -23,6 +23,7 @@ class ArtistContainer extends Component {
 
   componentDidMount() {
     if(this.props.artistId){
+      console.log('not random');
       axios.get('/artist/findOne', {
         params: { id: this.props.artistId }
       })
@@ -37,6 +38,7 @@ class ArtistContainer extends Component {
         console.log(error);
       })
     } else {
+      console.log('random');
       axios.get('/artist/random')
       .then( response => {
         if(response.data.artist){

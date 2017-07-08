@@ -15,7 +15,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path='/' component={SearchPage} />
-            <Route path='/artist' component={ArtistPage} />
+            <Route exact path='/artist' component={ArtistPage} />
             <Route path='/newArtist' component={CreatePage} />
             <Route path='/editArtist' component={UpdatePage} />
             <Route path='/artistInfo/:id' component={ArtistInfoPage} />
