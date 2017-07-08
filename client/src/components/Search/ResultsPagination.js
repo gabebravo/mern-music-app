@@ -17,7 +17,6 @@ class ResultsPagination extends Component {
   }
 
   render() {
-    console.log(this.props);
     let PaginationItems = this.printPagination(Math.ceil(this.props.totalItems/10));
     return (
       <Pagination style={{ justifyContent: 'center'}}>
